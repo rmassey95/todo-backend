@@ -1,4 +1,4 @@
-import express from "express";
+const express = require("express");
 
 const router = express.Router();
 
@@ -63,3 +63,5 @@ router.put("/task/update/:taskId", (req, res) => {
 router.delete("/task/delete/:taskId", (req, res) => {
   res.send("delete task");
 });
+
+module.exports = router;
