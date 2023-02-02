@@ -1,4 +1,6 @@
 const express = require("express");
+const userController = require("../controllers/userController");
+const taskController = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -7,21 +9,11 @@ router.get("/", (req, res) => {
 });
 
 // User routes
-router.get("/login", (req, res) => {
-  res.send("login");
-});
-
 router.post("/login", (req, res) => {
   res.send("login");
 });
 
-router.get("/signup", (req, res) => {
-  res.send("login");
-});
-
-router.post("/signup", (req, res) => {
-  res.send("login");
-});
+router.post("/signup", userController.handleSignUp);
 
 router.post("/logout", (req, res) => {
   res.send("logout");
