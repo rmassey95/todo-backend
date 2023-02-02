@@ -20,9 +20,7 @@ router.post(
 
 router.post("/signup", userController.handleSignUp);
 
-router.post("/logout", (req, res) => {
-  res.send("logout");
-});
+router.post("/logout", userController.logout);
 
 // Task router
 router.get("/tasks", (req, res) => {

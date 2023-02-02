@@ -53,3 +53,12 @@ exports.failedLogin = (req, res, next) => {
 exports.login = (req, res, next) => {
   res.status(200).json({ loginSuccess: true, msg: "Login successful" });
 };
+
+exports.logout = (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.status(200).json({ logout: true, msg: "Successfully logged out" });
+  });
+};
