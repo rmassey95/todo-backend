@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const userController = require("../controllers/userController");
 const taskController = require("../controllers/userController");
 
@@ -9,9 +10,13 @@ router.get("/", (req, res) => {
 });
 
 // User routes
-router.post("/login", (req, res) => {
-  res.send("login");
-});
+router.get("/login/failed", userController.failedLogin);
+
+router.post(
+  "/login",
+  passport.authenticate("local", { failureRedirect: "login/failed" }),
+  userController.login
+);
 
 router.post("/signup", userController.handleSignUp);
 

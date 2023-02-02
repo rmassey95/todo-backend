@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, check } = require("express-validator");
 const User = require("../models/user");
 
 exports.handleSignUp = [
@@ -43,3 +43,13 @@ exports.handleSignUp = [
     });
   },
 ];
+
+exports.failedLogin = (req, res, next) => {
+  res
+    .status(400)
+    .json({ loginSuccess: false, msg: "Username or password does not match" });
+};
+
+exports.login = (req, res, next) => {
+  res.status(200).json({ loginSuccess: true, msg: "Login successful" });
+};
