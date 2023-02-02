@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const userController = require("../controllers/userController");
-const taskController = require("../controllers/userController");
+const taskController = require("../controllers/taskController");
 
 const router = express.Router();
 
@@ -47,9 +47,7 @@ router.get("/tasks/by-project/:project", (req, res) => {
   res.send("tasks sort by project");
 });
 
-router.post("/task/create", (req, res) => {
-  res.send("post task");
-});
+router.post("/task/create", taskController.createTask);
 
 router.put("/task/update/:taskId", (req, res) => {
   res.send("update task");
