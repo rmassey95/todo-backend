@@ -26,9 +26,7 @@ router.post("/logout", userController.logout);
 // Task router
 router.get("/tasks", taskController.getAllTasks);
 
-router.get("/task/:taskId", (req, res) => {
-  res.send("get single task");
-});
+router.get("/task/:taskId", taskController.getSingleTask);
 
 router.get("/tasks/by-date/:date", (req, res) => {
   res.send("tasks sort by date");

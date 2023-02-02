@@ -84,3 +84,13 @@ exports.getAllTasks = (req, res, next) => {
     res.status(200).json(tasks);
   });
 };
+
+exports.getSingleTask = (req, res, next) => {
+  Task.findById(req.params.taskId).exec((err, task) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(task);
+  });
+};
