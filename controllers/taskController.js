@@ -94,3 +94,13 @@ exports.getSingleTask = (req, res, next) => {
     return res.status(200).json(task);
   });
 };
+
+exports.getTaskByDate = (req, res, next) => {
+  Task.find({ dueDate: req.params.date }).exec((err, tasks) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(tasks);
+  });
+};

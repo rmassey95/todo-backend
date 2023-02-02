@@ -28,9 +28,8 @@ router.get("/tasks", taskController.getAllTasks);
 
 router.get("/task/:taskId", taskController.getSingleTask);
 
-router.get("/tasks/by-date/:date", (req, res) => {
-  res.send("tasks sort by date");
-});
+// date format is "YYYY-MM-DD"
+router.get("/tasks/by-date/:date", taskController.getTaskByDate);
 
 router.get("/tasks/by-label/:label", (req, res) => {
   res.send("tasks sort by label");
