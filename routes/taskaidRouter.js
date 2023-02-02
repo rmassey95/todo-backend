@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const userController = require("../controllers/userController");
 const taskController = require("../controllers/taskController");
+const validateUser = require("../middleware/validateUser");
 
 const router = express.Router();
 
@@ -23,9 +24,7 @@ router.post("/signup", userController.handleSignUp);
 router.post("/logout", userController.logout);
 
 // Task router
-router.get("/tasks", (req, res) => {
-  res.send("task homepage");
-});
+router.get("/tasks", taskController.getAllTasks);
 
 router.get("/task/:taskId", (req, res) => {
   res.send("get single task");
@@ -51,8 +50,6 @@ router.post("/task/create", taskController.createTask);
 
 router.put("/task/update/:taskId", taskController.updateTask);
 
-router.delete("/task/delete/:taskId", (req, res) => {
-  res.send("delete task");
-});
+router.delete("/task/delete/:taskId", validateUser, taskController.deleteTask);
 
 module.exports = router;

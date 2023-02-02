@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const Task = require("../models/task");
-const validateTask = require("../public/scripts/validateTask");
+const validateTask = require("../middleware/validateTask");
 
 exports.createTask = [
   validateTask,
@@ -20,7 +20,7 @@ exports.createTask = [
       desc: req.body.desc,
       completed: false,
       recurring: req.body.recurring,
-      user: req.user._id,
+      user: "63dbd632e91386f1854f6217",
     });
 
     task.save((err) => {
@@ -64,3 +64,23 @@ exports.updateTask = [
     });
   },
 ];
+
+exports.deleteTask = (req, res, next) => {
+  Task.findByIdAndRemove(req.params.taskId, (err, deletedTask) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(deletedTask);
+  });
+};
+
+exports.getAllTasks = (req, res, next) => {
+  Task.find().exec((err, tasks) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.status(200).json(tasks);
+  });
+};
