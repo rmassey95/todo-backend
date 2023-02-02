@@ -29,19 +29,13 @@ router.get("/tasks", taskController.getAllTasks);
 router.get("/task/:taskId", taskController.getSingleTask);
 
 // date format is "YYYY-MM-DD"
-router.get("/tasks/by-date/:date", taskController.getTaskByDate);
+router.get("/tasks/by-date/:date", taskController.getTasksByDate);
 
-router.get("/tasks/by-label/:label", (req, res) => {
-  res.send("tasks sort by label");
-});
+router.get("/tasks/by-label/:label", taskController.getTasksByLabel);
 
-router.get("/tasks/by-priority/:priority", (req, res) => {
-  res.send("tasks sort by priority");
-});
+router.get("/tasks/by-priority/:priority", taskController.getTasksByPrio);
 
-router.get("/tasks/by-project/:project", (req, res) => {
-  res.send("tasks sort by project");
-});
+router.get("/tasks/by-project/:project", taskController.getTasksByProject);
 
 router.post("/task/create", taskController.createTask);
 

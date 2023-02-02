@@ -95,8 +95,38 @@ exports.getSingleTask = (req, res, next) => {
   });
 };
 
-exports.getTaskByDate = (req, res, next) => {
+exports.getTasksByDate = (req, res, next) => {
   Task.find({ dueDate: req.params.date }).exec((err, tasks) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(tasks);
+  });
+};
+
+exports.getTasksByLabel = (req, res, next) => {
+  Task.find({ label: req.params.label }).exec((err, tasks) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(tasks);
+  });
+};
+
+exports.getTasksByPrio = (req, res, next) => {
+  Task.find({ priority: req.params.priority }).exec((err, tasks) => {
+    if (err) {
+      return next(err);
+    }
+
+    return res.status(200).json(tasks);
+  });
+};
+
+exports.getTasksByProject = (req, res, next) => {
+  Task.find({ proj: req.params.project }).exec((err, tasks) => {
     if (err) {
       return next(err);
     }
