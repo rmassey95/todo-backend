@@ -20,7 +20,7 @@ exports.createTask = [
       desc: req.body.desc,
       completed: false,
       recurring: req.body.recurring,
-      user: "63dbd632e91386f1854f6217",
+      user: req.user._id,
     });
 
     task.save((err) => {
@@ -76,7 +76,7 @@ exports.deleteTask = (req, res, next) => {
 };
 
 exports.getAllTasks = (req, res, next) => {
-  Task.find().exec((err, tasks) => {
+  Task.find({ user: req.user._id }).exec((err, tasks) => {
     if (err) {
       return next(err);
     }
