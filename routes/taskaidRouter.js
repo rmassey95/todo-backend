@@ -49,9 +49,7 @@ router.get("/tasks/by-project/:project", (req, res) => {
 
 router.post("/task/create", taskController.createTask);
 
-router.put("/task/update/:taskId", (req, res) => {
-  res.send("update task");
-});
+router.put("/task/update/:taskId", taskController.updateTask);
 
 router.delete("/task/delete/:taskId", (req, res) => {
   res.send("delete task");

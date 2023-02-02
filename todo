@@ -1,0 +1,1 @@
+Allow user to update a task ONLY if the task hasn't already been completed (that is, completed === false)
