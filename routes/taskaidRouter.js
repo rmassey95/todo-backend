@@ -6,9 +6,15 @@ const validateUser = require("../middleware/validateUser");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("homepage");
-});
+const userAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    return res
+      .status(401)
+      .json({ userAuthenticated: false, msg: "User not authenticated" });
+  }
+};
 
 // User routes
 router.get("/login/failed", userController.failedLogin);
@@ -16,7 +22,7 @@ router.get("/login/failed", userController.failedLogin);
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "login/failed" }),
-  userController.login
+  userController.loginSuccess
 );
 
 router.post("/signup", userController.handleSignUp);
@@ -24,7 +30,7 @@ router.post("/signup", userController.handleSignUp);
 router.post("/logout", userController.logout);
 
 // Task router
-router.get("/tasks", taskController.getAllTasks);
+router.get("/tasks", userAuthenticated, taskController.getAllTasks);
 
 router.get("/task/:taskId", taskController.getSingleTask);
 

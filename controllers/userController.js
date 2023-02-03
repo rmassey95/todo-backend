@@ -46,10 +46,10 @@ exports.handleSignUp = [
 exports.failedLogin = (req, res, next) => {
   res
     .status(400)
-    .json({ loginSuccess: false, msg: "Username or password does not match" });
+    .json({ loginSuccess: false, msg: "Username or password is invalid" });
 };
 
-exports.login = (req, res, next) => {
+exports.loginSuccess = (req, res, next) => {
   res.status(200).json({ loginSuccess: true, msg: "Login successful" });
 };
 
