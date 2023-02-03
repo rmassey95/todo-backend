@@ -33,7 +33,6 @@ exports.handleSignUp = [
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
-        profileImg: req.body.profileImg,
       }).save((err) => {
         if (err) {
           return next(err);
