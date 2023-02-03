@@ -10,7 +10,6 @@ const TaskSchema = new Schema({
     required: true,
   },
   label: { type: String, trim: true },
-  proj: { type: String, trim: true },
   desc: { type: String, trim: true },
   completed: { type: Boolean, default: false, required: true },
   recurring: { type: Boolean, default: false, required: true },

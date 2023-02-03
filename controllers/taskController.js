@@ -16,7 +16,6 @@ exports.createTask = [
       dueDate: req.body.dueDate,
       priority: req.body.priority,
       label: req.body.label,
-      proj: req.body.proj,
       desc: req.body.desc,
       completed: false,
       recurring: req.body.recurring,
@@ -47,7 +46,6 @@ exports.updateTask = [
       dueDate: req.body.dueDate,
       priority: req.body.priority,
       label: req.body.label,
-      proj: req.body.proj,
       desc: req.body.desc,
       completed: false,
       recurring: req.body.recurring,
@@ -117,16 +115,6 @@ exports.getTasksByLabel = (req, res, next) => {
 
 exports.getTasksByPrio = (req, res, next) => {
   Task.find({ priority: req.params.priority }).exec((err, tasks) => {
-    if (err) {
-      return next(err);
-    }
-
-    return res.status(200).json(tasks);
-  });
-};
-
-exports.getTasksByProject = (req, res, next) => {
-  Task.find({ proj: req.params.project }).exec((err, tasks) => {
     if (err) {
       return next(err);
     }

@@ -16,11 +16,6 @@ module.exports = validateTask = [
     .trim()
     .isAlphanumeric("en-US", { ignore: " -" })
     .withMessage("Label must only include letters and numbers"),
-  body("proj")
-    .optional({ checkFalsy: true })
-    .trim()
-    .isAlphanumeric("en-US", { ignore: " -" })
-    .withMessage("Project must only include letters and numbers"),
   body("desc")
     .optional({ checkFalsy: true })
     .trim()

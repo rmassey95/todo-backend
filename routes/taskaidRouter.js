@@ -41,8 +41,6 @@ router.get("/tasks/by-label/:label", taskController.getTasksByLabel);
 
 router.get("/tasks/by-priority/:priority", taskController.getTasksByPrio);
 
-router.get("/tasks/by-project/:project", taskController.getTasksByProject);
-
 router.post("/task/create", taskController.createTask);
 
 router.put("/task/update/:taskId", taskController.updateTask);
