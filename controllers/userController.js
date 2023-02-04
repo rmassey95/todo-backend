@@ -61,3 +61,15 @@ exports.logout = (req, res, next) => {
     res.status(200).json({ logout: true, msg: "Successfully logged out" });
   });
 };
+
+exports.labels = (req, res, next) => {
+  User.findById(req.user._id)
+    .select({ taskLabels: 1, _id: 0 })
+    .exec((err, taskLabels) => {
+      if (err) {
+        return next(err);
+      }
+
+      return res.status(200).json(taskLabels);
+    });
+};

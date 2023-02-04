@@ -114,11 +114,13 @@ exports.getTasksByLabel = (req, res, next) => {
 };
 
 exports.getTasksByPrio = (req, res, next) => {
-  Task.find({ priority: req.params.priority }).exec((err, tasks) => {
-    if (err) {
-      return next(err);
-    }
+  Task.find({ priority: req.params.priority, user: req.user._id }).exec(
+    (err, tasks) => {
+      if (err) {
+        return next(err);
+      }
 
-    return res.status(200).json(tasks);
-  });
+      return res.status(200).json(tasks);
+    }
+  );
 };

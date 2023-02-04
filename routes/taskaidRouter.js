@@ -29,6 +29,8 @@ router.post("/signup", userController.handleSignUp);
 
 router.post("/logout", userController.logout);
 
+router.get("/user/labels", userController.labels);
+
 // Task router
 router.get("/tasks", userAuthenticated, taskController.getAllTasks);
 
