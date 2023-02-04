@@ -29,24 +29,46 @@ router.post("/signup", userController.handleSignUp);
 
 router.post("/logout", userController.logout);
 
-router.get("/user/labels", userController.labels);
+router.get("/user/labels", userAuthenticated, userController.labels);
 
 // Task router
 router.get("/tasks", userAuthenticated, taskController.getAllTasks);
 
-router.get("/task/:taskId", taskController.getSingleTask);
+router.get("/task/:taskId", userAuthenticated, taskController.getSingleTask);
 
 // date format is "YYYY-MM-DD"
-router.get("/tasks/by-date/:date", taskController.getTasksByDate);
+router.get(
+  "/tasks/by-date/:date",
+  userAuthenticated,
+  taskController.getTasksByDate
+);
 
-router.get("/tasks/by-label/:label", taskController.getTasksByLabel);
+router.get(
+  "/tasks/by-label/:label",
+  userAuthenticated,
+  taskController.getTasksByLabel
+);
 
-router.get("/tasks/by-priority/:priority", taskController.getTasksByPrio);
+router.get(
+  "/tasks/by-priority/:priority",
+  userAuthenticated,
+  taskController.getTasksByPrio
+);
 
-router.post("/task/create", taskController.createTask);
+router.post("/task/create", userAuthenticated, taskController.createTask);
 
-router.put("/task/update/:taskId", taskController.updateTask);
+router.put(
+  "/task/update/:taskId",
+  userAuthenticated,
+  validateUser,
+  taskController.updateTask
+);
 
-router.delete("/task/delete/:taskId", validateUser, taskController.deleteTask);
+router.delete(
+  "/task/delete/:taskId",
+  userAuthenticated,
+  validateUser,
+  taskController.deleteTask
+);
 
 module.exports = router;

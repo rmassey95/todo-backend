@@ -94,13 +94,15 @@ exports.getSingleTask = (req, res, next) => {
 };
 
 exports.getTasksByDate = (req, res, next) => {
-  Task.find({ dueDate: req.params.date }).exec((err, tasks) => {
-    if (err) {
-      return next(err);
-    }
+  Task.find({ dueDate: req.params.date, user: req.user._id }).exec(
+    (err, tasks) => {
+      if (err) {
+        return next(err);
+      }
 
-    return res.status(200).json(tasks);
-  });
+      return res.status(200).json(tasks);
+    }
+  );
 };
 
 exports.getTasksByLabel = (req, res, next) => {
