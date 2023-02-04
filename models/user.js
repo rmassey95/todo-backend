@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   },
   taskLabels: {
     type: [String],
-    default: [],
+    default: ["No Label"],
   },
 });
 
