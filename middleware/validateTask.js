@@ -23,7 +23,4 @@ module.exports = validateTask = [
     .withMessage("Task description must only include letters and numbers")
     .isLength({ min: 3 })
     .withMessage("Task description must be atleast 3 characters long"),
-  body("recurring")
-    .isBoolean()
-    .withMessage("Recurring must either be true or false"),
 ];

@@ -18,7 +18,6 @@ exports.createTask = [
       label: req.body.label,
       desc: req.body.desc,
       completed: false,
-      recurring: req.body.recurring,
       user: req.user._id,
     });
 
@@ -48,7 +47,6 @@ exports.updateTask = [
       label: req.body.label,
       desc: req.body.desc,
       completed: false,
-      recurring: req.body.recurring,
       user: req.user._id,
       _id: req.params.taskId,
     });

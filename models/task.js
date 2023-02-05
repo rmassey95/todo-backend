@@ -12,7 +12,6 @@ const TaskSchema = new Schema({
   label: { type: String, trim: true },
   desc: { type: String, trim: true },
   completed: { type: Boolean, default: false, required: true },
-  recurring: { type: Boolean, default: false, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
