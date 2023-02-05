@@ -6,7 +6,7 @@ module.exports = validateUser = (req, res, next) => {
       return next(err);
     }
 
-    if (task.user == req.user._id) {
+    if (task.user.equals(req.user._id)) {
       return next();
     }
 

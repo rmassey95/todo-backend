@@ -33,6 +33,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   // allow header to be set in React App
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  // allowed headers in requests
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   next();
 });
 

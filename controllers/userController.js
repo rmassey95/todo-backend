@@ -73,3 +73,17 @@ exports.labels = (req, res, next) => {
       return res.status(200).json(taskLabels);
     });
 };
+
+exports.addLabel = (req, res, next) => {
+  const taskLabels = req.user.taskLabels;
+  taskLabels.push(req.params.label);
+
+  User.findByIdAndUpdate(req.user._id, {
+    taskLabels: taskLabels,
+  }).exec((err, result) => {
+    if (err) {
+      return next(err);
+    }
+    return res.status(200).json(result);
+  });
+};

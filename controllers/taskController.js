@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const Task = require("../models/task");
+const User = require("../models/user");
 const validateTask = require("../middleware/validateTask");
 
 exports.createTask = [

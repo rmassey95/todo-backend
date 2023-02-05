@@ -31,6 +31,12 @@ router.post("/logout", userController.logout);
 
 router.get("/user/labels", userAuthenticated, userController.labels);
 
+router.post(
+  "/user/add-label/:label",
+  userAuthenticated,
+  userController.addLabel
+);
+
 // Task router
 router.get("/tasks", userAuthenticated, taskController.getAllTasks);
 
