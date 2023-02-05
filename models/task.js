@@ -9,7 +9,7 @@ const TaskSchema = new Schema({
     enum: ["low", "med", "high", "none"],
     required: true,
   },
-  label: { type: String, trim: true },
+  label: { type: String, trim: true, default: "No Label" },
   desc: { type: String, trim: true },
   completed: { type: Boolean, default: false, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User" },
