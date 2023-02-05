@@ -84,13 +84,15 @@ exports.getAllTasks = (req, res, next) => {
 };
 
 exports.getSingleTask = (req, res, next) => {
-  Task.findById(req.params.taskId).exec((err, task) => {
-    if (err) {
-      return next(err);
-    }
+  Task.find({ _id: req.params.taskId, user: req.user._id }).exec(
+    (err, task) => {
+      if (err) {
+        return next(err);
+      }
 
-    return res.status(200).json(task);
-  });
+      return res.status(200).json(task);
+    }
+  );
 };
 
 exports.getTasksByDate = (req, res, next) => {
@@ -106,13 +108,15 @@ exports.getTasksByDate = (req, res, next) => {
 };
 
 exports.getTasksByLabel = (req, res, next) => {
-  Task.find({ label: req.params.label }).exec((err, tasks) => {
-    if (err) {
-      return next(err);
-    }
+  Task.find({ label: req.params.label, user: req.user._id }).exec(
+    (err, tasks) => {
+      if (err) {
+        return next(err);
+      }
 
-    return res.status(200).json(tasks);
-  });
+      return res.status(200).json(tasks);
+    }
+  );
 };
 
 exports.getTasksByPrio = (req, res, next) => {
