@@ -25,11 +25,21 @@ router.post(
   userController.loginSuccess
 );
 
+router.get("/login/status", userAuthenticated, (req, res) => {
+  res.status(200).json({ loggedIn: true });
+});
+
 router.post("/signup", userController.handleSignUp);
 
 router.post("/logout", userController.logout);
 
 router.get("/user/labels", userAuthenticated, userController.labels);
+
+router.put(
+  "/user/remove-label/:label",
+  userAuthenticated,
+  userController.updateLabels
+);
 
 router.post(
   "/user/add-label/:label",

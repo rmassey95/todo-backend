@@ -87,3 +87,19 @@ exports.addLabel = (req, res, next) => {
     return res.status(200).json(result);
   });
 };
+
+exports.updateLabels = (req, res, next) => {
+  const taskLabels = req.user.taskLabels;
+
+  const index = taskLabels.indexOf(req.params.label);
+  taskLabels.splice(index, 1);
+
+  User.findByIdAndUpdate(req.user._id, {
+    taskLabels: taskLabels,
+  }).exec((err, result) => {
+    if (err) {
+      return next(err);
+    }
+    return res.status(200).json(result);
+  });
+};
