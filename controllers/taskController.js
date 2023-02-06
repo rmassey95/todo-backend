@@ -83,7 +83,7 @@ exports.getAllTasks = (req, res, next) => {
 };
 
 exports.getSingleTask = (req, res, next) => {
-  Task.find({ _id: req.params.taskId, user: req.user._id }).exec(
+  Task.findOne({ _id: req.params.taskId, user: req.user._id }).exec(
     (err, task) => {
       if (err) {
         return next(err);
