@@ -103,3 +103,15 @@ exports.updateLabels = (req, res, next) => {
     return res.status(200).json(result);
   });
 };
+
+exports.updateProfileImg = (req, res, next) => {
+  User.findByIdAndUpdate(req.user._id, {
+    profileImg: req.body.profileImg,
+  }).exec((err, result) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.status(200).json(result);
+  });
+};

@@ -26,7 +26,7 @@ router.post(
 );
 
 router.get("/login/status", userAuthenticated, (req, res) => {
-  res.status(200).json({ loggedIn: true });
+  res.status(200).json(req.user);
 });
 
 router.post("/signup", userController.handleSignUp);
@@ -39,6 +39,12 @@ router.put(
   "/user/remove-label/:label",
   userAuthenticated,
   userController.updateLabels
+);
+
+router.put(
+  "/user/profile-img/update",
+  userAuthenticated,
+  userController.updateProfileImg
 );
 
 router.post(
