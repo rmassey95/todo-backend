@@ -19,8 +19,6 @@ module.exports = validateTask = [
   body("desc")
     .optional({ checkFalsy: true })
     .trim()
-    .isAlphanumeric("en-US", { ignore: " -" })
-    .withMessage("Task description must only include letters and numbers")
     .isLength({ min: 3 })
     .withMessage("Task description must be atleast 3 characters long"),
 ];
