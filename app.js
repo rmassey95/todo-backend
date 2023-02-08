@@ -29,11 +29,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    // store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
       // secure: true,
       // httpOnly: true,
-      domain: process.env.DOMAIN_URL,
+      // domain: process.env.DOMAIN_URL,
       expires: 24 * 60 * 60 * 1000,
     },
   })
