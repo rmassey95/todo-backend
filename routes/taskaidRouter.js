@@ -7,6 +7,7 @@ const validateUser = require("../middleware/validateUser");
 const router = express.Router();
 
 const userAuthenticated = (req, res, next) => {
+  console.log(req);
   if (req.isAuthenticated()) {
     return next();
   } else {
