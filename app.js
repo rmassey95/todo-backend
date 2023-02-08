@@ -45,7 +45,10 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   // allow CORS for React App
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gorgeous-piroshki-03aec7.netlify.app"
+  );
   // allow crendentials to be sent
   res.setHeader("Access-Control-Allow-Credentials", "true");
   // allow header to be set in React App
