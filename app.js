@@ -26,7 +26,7 @@ app.use(limiter);
 app.use(helmet());
 
 const mongoDBstore = new MongoStore({
-  url: process.env.MONGODB_URI,
+  uri: process.env.MONGODB_URI,
   collection: "mySessions",
 });
 
