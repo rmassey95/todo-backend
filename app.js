@@ -33,6 +33,7 @@ app.use(
     cookie: {
       secure: true,
       httpOnly: true,
+      domain: process.env.DOMAIN_URL,
       expires: 24 * 60 * 60 * 1000,
     },
   })
@@ -45,10 +46,7 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   // allow CORS for React App
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gorgeous-piroshki-03aec7.netlify.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN_URL);
   // allow crendentials to be sent
   res.setHeader("Access-Control-Allow-Credentials", "true");
   // allow header to be set in React App
