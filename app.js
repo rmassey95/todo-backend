@@ -24,13 +24,22 @@ const limiter = rateLimit({
 
 app.use(limiter);
 app.use(helmet());
+
+const mongoDBstore = new MongoStore({
+  url: process.env.MONGODB_URI,
+  collection: "mySessions",
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    name: "session-id",
+    resave: true,
     saveUninitialized: false,
     // store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
+      sameSite: false,
+      secure: false,
       // secure: true,
       // httpOnly: true,
       // domain: process.env.DOMAIN_URL,
