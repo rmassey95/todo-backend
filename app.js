@@ -40,13 +40,15 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin: "https://gorgeous-piroshki-03aec7.netlify.app",
-    methods: ["POST", "PUT", "GET", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
+
+// app.use(
+//   cors({
+//     origin: "https://gorgeous-piroshki-03aec7.netlify.app",
+//     methods: ["POST", "PUT", "GET", "DELETE"],
+//     credentials: true,
+//   })
+// );
 
 app.use(limiter);
 app.use(helmet());
