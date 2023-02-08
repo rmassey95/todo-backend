@@ -31,7 +31,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      sameSite: "none",
+      sameSite: false,
       secure: true,
       domain: process.env.DOMAIN_URL,
       expires: 24 * 60 * 60 * 1000,
