@@ -22,28 +22,6 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-app.use(limiter);
-app.use(helmet());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-    cookie: {
-      sameSite: false,
-      secure: true,
-      domain: process.env.DOMAIN_URL,
-      expires: 24 * 60 * 60 * 1000,
-    },
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-// Parse body data from request
-app.use(express.json());
-
 app.use((req, res, next) => {
   // allow CORS for React App
   res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN_URL);
@@ -55,6 +33,28 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   next();
 });
+
+// app.use(limiter);
+// app.use(helmet());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    // cookie: {
+    //   sameSite: false,
+    //   secure: true,
+    //   domain: process.env.DOMAIN_URL,
+    //   expires: 24 * 60 * 60 * 1000,
+    // },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+// Parse body data from request
+app.use(express.json());
 
 app.use("/taskaid", taskaidRouter);
 
