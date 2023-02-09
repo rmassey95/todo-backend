@@ -50,7 +50,7 @@ app.use((req, res, next) => {
   // allow CORS for React App
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://gorgeous-piroshki-03aec7.netlify.app/taskaid/login"
+    "https://gorgeous-piroshki-03aec7.netlify.app"
   );
   // allow crendentials to be sent
   res.setHeader("Access-Control-Allow-Credentials", true);
