@@ -29,15 +29,13 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     name: "session-id",
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-      sameSite: false,
-      secure: false,
-      // secure: true,
+      secure: true,
       // httpOnly: true,
-      // domain: process.env.DOMAIN_URL,
+      domain: "https://gorgeous-piroshki-03aec7.netlify.app/taskaid/login",
       expires: 24 * 60 * 60 * 1000,
     },
   })
@@ -50,9 +48,12 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   // allow CORS for React App
-  res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN_URL);
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gorgeous-piroshki-03aec7.netlify.app/taskaid/login"
+  );
   // allow crendentials to be sent
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   // allow header to be set in React App
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   // allowed headers in requests
