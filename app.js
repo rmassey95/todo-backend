@@ -16,6 +16,16 @@ mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
+
+app.use(
+  cors({
+    origin: process.env.DOMAIN_URL,
+    methods: "GET,PUT,POST,DELETE",
+    allowedHeaders: "Content-Type",
+    credentials: true,
+  })
+);
+
 app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -44,17 +54,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-console.log(typeof process.env.DOMAIN_URL);
-
-app.use(
-  cors({
-    origin: process.env.DOMAIN_URL,
-    methods: "GET,PUT,POST,DELETE",
-    allowedHeaders: "Content-Type",
-    credentials: true,
-  })
-);
 
 // Parse body data from request
 app.use(express.json());
