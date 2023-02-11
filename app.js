@@ -15,7 +15,7 @@ mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
@@ -29,12 +29,11 @@ app.use(helmet());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    name: "secretname",
     cookie: {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      expires: 24 * 60 * 60 * 1000,
+      expires: 12 * 60 * 60 * 1000,
     },
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     saveUninitialized: false,
@@ -55,7 +54,7 @@ app.use((req, res, next) => {
   // allow header to be set in React App
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   // allowed headers in requests
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   next();
 });
 

@@ -73,9 +73,6 @@ exports.deleteTask = (req, res, next) => {
 };
 
 exports.getAllTasks = (req, res, next) => {
-  console.log("REQ IN TASKS:");
-  console.log(req.sessionID);
-  console.log(req.session);
   Task.find({ user: req.user._id }).exec((err, tasks) => {
     if (err) {
       return next(err);

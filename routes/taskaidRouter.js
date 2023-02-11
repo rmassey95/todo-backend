@@ -21,18 +21,16 @@ router.get("/login/failed", userController.failedLogin);
 
 router.post(
   "/login",
-  (req, res, next) => {
-    console.log("FIRST REQ:");
-    console.log(req.sessionID);
-    console.log(req.session);
-    next();
-  },
   passport.authenticate("local", { failureRedirect: "login/failed" }),
   userController.loginSuccess
 );
 
 router.get("/login/status", userAuthenticated, (req, res) => {
-  res.status(200).json(req.user);
+  res.status(200).json({
+    auth: true,
+    username: req.user.username,
+    profileImg: req.user.profileImg,
+  });
 });
 
 router.post("/signup", userController.handleSignUp);

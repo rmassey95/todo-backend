@@ -50,17 +50,10 @@ exports.failedLogin = (req, res, next) => {
 };
 
 exports.loginSuccess = (req, res, next) => {
-  console.log("SECOND REQ:");
-  console.log(req.sessionID);
-  console.log(req.session);
-  res
-    .status(200)
-    .json({
-      loginSuccess: true,
-      msg: "Login successful",
-      sessionID: req.sessionID,
-      session: req.session,
-    });
+  res.status(200).json({
+    loginSuccess: true,
+    msg: "Login successful",
+  });
 };
 
 exports.logout = (req, res, next) => {
