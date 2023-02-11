@@ -8,6 +8,7 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const rateLimit = require("express-rate-limit");
+const cors = require("cors");
 
 const taskaidRouter = require("./routes/taskaidRouter");
 
@@ -43,20 +44,32 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+console.log(typeof process.env.DOMAIN_URL);
+
+app.use(
+  cors({
+    origin: process.env.DOMAIN_URL,
+    methods: "GET,PUT,POST,DELETE",
+    allowedHeaders: "Content-Type",
+    credentials: true,
+  })
+);
+
 // Parse body data from request
 app.use(express.json());
 
-app.use((req, res, next) => {
-  // allow CORS for React App
-  res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN_URL);
-  // allow crendentials to be sent
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  // allow header to be set in React App
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // allowed headers in requests
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  next();
-});
+// app.use((req, res, next) => {
+//   // allow CORS for React App
+//   res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN_URL);
+//   // allow crendentials to be sent
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   // allow header to be set in React App
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   // allowed headers in requests
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+//   next();
+// });
 
 app.use("/taskaid", taskaidRouter);
 
