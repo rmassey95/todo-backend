@@ -21,6 +21,12 @@ router.get("/login/failed", userController.failedLogin);
 
 router.post(
   "/login",
+  (req, res, next) => {
+    console.log("FIRST REQ:");
+    console.log(req.sessionID);
+    console.log(req.session);
+    next();
+  },
   passport.authenticate("local", { failureRedirect: "login/failed" }),
   userController.loginSuccess
 );

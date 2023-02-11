@@ -28,17 +28,20 @@ app.use(helmet());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    name: "secretname",
     cookie: {
-      secure: true,
-      sameSite: "none",
       httpOnly: true,
+      secure: true,
+      sameSite: false,
       expires: 24 * 60 * 60 * 1000,
     },
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    saveUninitialized: false,
+    resave: false,
   })
 );
+
+app.set("trust proxy", 1);
 
 app.use(passport.initialize());
 app.use(passport.session());
