@@ -15,6 +15,7 @@ mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
+app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
@@ -32,7 +33,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: true,
-      sameSite: false,
+      sameSite: "none",
       expires: 24 * 60 * 60 * 1000,
     },
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
@@ -40,8 +41,6 @@ app.use(
     resave: false,
   })
 );
-
-app.set("trust proxy", 1);
 
 app.use(passport.initialize());
 app.use(passport.session());
